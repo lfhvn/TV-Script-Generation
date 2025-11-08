@@ -296,16 +296,21 @@ maxHistorySize: 20             // Samples to keep in history
 ### Battery Life
 
 **Estimated Impact**:
-- Heart rate monitoring: ~5-10% per hour
-- Motion monitoring: ~2-5% per hour
-- Display active: ~10-15% per hour
-- **Total**: ~20-30% battery per hour of monitoring
+- Heart rate monitoring: ~2-3% per hour (leverages existing Watch monitoring)
+- Motion monitoring: ~2-3% per hour (low 10 Hz sample rate)
+- Background processing: ~1-2% per hour
+- Workout session overhead: ~1-2% per hour
+- **Total**: ~5-10% battery per hour of monitoring
+
+**With these estimates, you can monitor for 10-20 hours on a full charge.**
 
 **Optimization Strategies**:
-- Use anchored queries (no polling)
-- Reduce motion sample rate (10 Hz, not 50-100 Hz)
+- Use HKAnchoredObjectQuery (no polling, event-driven)
+- Low motion sample rate (10 Hz, not 50-100 Hz)
+- Use workout session for efficient background execution
 - Process data in batches
 - No data storage or logging
+- Screen can sleep normally (doesn't need to stay on)
 
 ### CPU Usage
 

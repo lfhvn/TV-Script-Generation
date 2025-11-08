@@ -191,13 +191,15 @@ Everyone's physiology is different. You may need to adjust sensitivity:
 ### "Battery draining too fast"
 
 **Expected:**
-- ~20-30% per hour during active monitoring
+- ~5-10% per hour during active monitoring
+- Can monitor for 10-20 hours on a full charge
 - This is normal for continuous sensor use
 
 **To conserve:**
 - Fully charge before long monitoring sessions
 - Close other active apps on watch
-- Consider getting a battery pack or spare watch for very long shifts
+- Disable always-on display if your Watch has it
+- Lower screen brightness
 
 ### "Alert is not loud/strong enough"
 

@@ -17,6 +17,7 @@ class MonitoringManager: NSObject, ObservableObject {
     private var alertPlayer: AVAudioPlayer?
     private var lastAlertTime: Date?
     private let alertCooldown: TimeInterval = 30 // Minimum seconds between alerts
+    private var workoutSession: HKWorkoutSession?
 
     private let connectivityManager = WatchConnectivityManager.shared
 
@@ -53,24 +54,43 @@ class MonitoringManager: NSObject, ObservableObject {
     func startMonitoring() {
         isMonitoring = true
         sleepDetector.reset()
+        startBackgroundSession()
         startHeartRateMonitoring()
         startMotionMonitoring()
         connectivityManager.activateSession()
 
         // Send status to iPhone
         connectivityManager.updateContext(["isMonitoring": true])
-
-        // Keep the app running in the background
-        WKExtension.shared().isAutorotating = false
     }
 
     func stopMonitoring() {
         isMonitoring = false
         stopHeartRateMonitoring()
         stopMotionMonitoring()
+        stopBackgroundSession()
 
         // Send status to iPhone
         connectivityManager.updateContext(["isMonitoring": false])
+    }
+
+    private func startBackgroundSession() {
+        // Create a workout session to keep the app running in background
+        let configuration = HKWorkoutConfiguration()
+        configuration.activityType = .other
+        configuration.locationType = .unknown
+
+        do {
+            let session = try HKWorkoutSession(healthStore: healthStore, configuration: configuration)
+            workoutSession = session
+            session.startActivity(with: Date())
+        } catch {
+            print("Failed to start background session: \(error.localizedDescription)")
+        }
+    }
+
+    private func stopBackgroundSession() {
+        workoutSession?.end()
+        workoutSession = nil
     }
 
     private func startHeartRateMonitoring() {
@@ -171,9 +191,6 @@ class MonitoringManager: NSObject, ObservableObject {
 
             // Play alarm sound
             self?.playAlarmSound()
-
-            // Keep screen on
-            WKExtension.shared().isAutorotating = false
 
             // Send alert to iPhone
             self?.connectivityManager.sendMessage(["alert": "sleep_detected"])

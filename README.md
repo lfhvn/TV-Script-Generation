@@ -12,8 +12,9 @@ An iOS and Apple Watch app that automatically detects when someone has fallen as
 
 - **Real-time Sleep Detection**: Uses Apple Watch sensors (heart rate, motion) to detect when you're falling asleep
 - **Immediate Alerts**: Haptic, sound, and visual alerts on both Watch and iPhone
-- **Lightweight Design**: Minimal battery impact using native Apple frameworks
+- **Lightweight Design**: ~5-10% battery per hour, can monitor for 10-20 hours
 - **Simple Interface**: Easy start/stop monitoring with clear status indicators
+- **Background Operation**: Runs efficiently in the background, screen can sleep normally
 
 ## How It Works
 
