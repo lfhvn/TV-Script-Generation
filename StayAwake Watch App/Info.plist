@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NSHealthShareUsageDescription</key>
+    <string>StayAwake needs access to your heart rate to detect when you're falling asleep.</string>
+    <key>NSMotionUsageDescription</key>
+    <string>StayAwake needs access to motion sensors to detect sleep patterns.</string>
+    <key>WKRunsIndependently</key>
+    <true/>
+    <key>WKBackgroundModes</key>
+    <array>
+        <string>workout-processing</string>
+        <string>self-care</string>
+    </array>
+    <key>CFBundleDisplayName</key>
+    <string>StayAwake</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.stayawake.app.watchkitapp</string>
+    <key>CFBundleVersion</key>
+    <string>1.0</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>WKApplication</key>
+    <true/>
+</dict>
+</plist>
